@@ -15,10 +15,16 @@ public class NotificationService implements ApplicationEventPublisherAware {
     Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
     private ApplicationEventPublisher applicationEventPublisher;
+    private FeatureManager featureManager;
 
+    public NotificationService(FeatureManager featureManager) {
+        this.featureManager = featureManager;
+    }
 
     public void notify(String message) {
-
+        if(featureManager.isActive(Features.EVENT_BASED_COMMUNICATION)) {
+            applicationEventPublisher.publishEvent(new NotificationEvent("Async message: " + message));
+        }
         logger.info("Sync message: " + message);
     }
 

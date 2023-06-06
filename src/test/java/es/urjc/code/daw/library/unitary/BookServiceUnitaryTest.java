@@ -7,11 +7,16 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.togglz.core.manager.EnumBasedFeatureProvider;
+import org.togglz.core.manager.FeatureManagerBuilder;
+import org.togglz.core.repository.mem.InMemoryStateRepository;
+import org.togglz.core.user.NoOpUserProvider;
 
 import es.urjc.code.daw.library.book.Book;
 import es.urjc.code.daw.library.book.BookRepository;
 import es.urjc.code.daw.library.book.BookService;
 import es.urjc.code.daw.library.notification.NotificationService;
+import es.urjc.code.daw.library.toggle.Features;
 
 @DisplayName("BookService Unitary tests")
 public class BookServiceUnitaryTest {
@@ -25,7 +30,11 @@ public class BookServiceUnitaryTest {
         
         repository = mock(BookRepository.class);
         notificationService = mock(NotificationService.class);
-        bookService = new BookService(repository, notificationService);
+        bookService = new BookService(repository, notificationService, new FeatureManagerBuilder()
+        .featureEnum(Features.class)
+        .stateRepository(new InMemoryStateRepository())
+        .userProvider(new NoOpUserProvider())
+        .build());
 			
     }
 

@@ -63,6 +63,22 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Togglz testing support -->
+		<dependency>
+		<groupId>org.togglz</groupId>
+		<artifactId>togglz-testing</artifactId>
+		<version>3.1.2</version>
+		<scope>test</scope>
+		</dependency> 
+
+		<dependency>
+		<groupId>org.togglz</groupId>
+		<artifactId>togglz-junit</artifactId>
+		<version>3.1.2</version>
+		<scope>test</scope>
+		</dependency>
+
 		<!-- REST ASSURED -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>

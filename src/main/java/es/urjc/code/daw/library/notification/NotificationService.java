@@ -24,8 +24,9 @@ public class NotificationService implements ApplicationEventPublisherAware {
     public void notify(String message) {
         if(featureManager.isActive(Features.EVENT_BASED_COMMUNICATION)) {
             applicationEventPublisher.publishEvent(new NotificationEvent("Async message: " + message));
+        } else {
+            logger.info("Sync message: " + message);
         }
-        logger.info("Sync message: " + message);
     }
 
     @Override
